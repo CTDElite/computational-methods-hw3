@@ -89,7 +89,7 @@ public abstract class MethodForLorentzSystem {
      * Your code should like something like:
      *
      * ```
-     * List<Double> x, y, z, t; // Should be instantiated ofc
+     * List<Double> x, y, z, t; // Should be instantiated of
      * for (double i = ta; i <= tb; i += dt) {
      *     // Some math
      * }

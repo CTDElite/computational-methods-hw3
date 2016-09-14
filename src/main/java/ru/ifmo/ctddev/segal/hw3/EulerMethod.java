@@ -11,6 +11,23 @@ public class EulerMethod extends MethodForLorentzSystem {
     }
 
     public Result run() {
-        return null; // TODO: implement by @DariaYakovleva
+        Result result = new Result();
+        double curX = x0;
+        double curY = y0;
+        double curZ = z0;
+        double nextX;
+        double nextY;
+        double nextZ;
+        for (double t = ta; t <= tb; t += dt) {
+            result.addPoint(curX, curY, curZ, t);
+            nextX = firstEquation(curX, curY, curZ) * dt + curX;
+            nextY = secondEquation(curX, curY, curZ) * dt + curY;
+            nextZ = thirdEquation(curX, curY, curZ) * dt + curZ;
+            curX = nextX;
+            curY = nextY;
+            curZ = nextZ;
+        }
+        result.checkValues();
+        return result;
     }
 }
