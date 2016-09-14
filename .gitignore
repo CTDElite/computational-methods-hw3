@@ -1,0 +1,8 @@
+# Specially for Daria Vladimirovna
+*
+!*.java
+!*.scala
+!*.groovy
+!*.hs
+!pom.xml
+!.gitignore
