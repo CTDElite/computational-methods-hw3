@@ -1,8 +1,9 @@
 # Specially for Daria Vladimirovna
-*
 !*.java
 !*.scala
 !*.groovy
 !*.hs
+!*.fxml
+!src/main/java/ru/ifmo/ctddev/segal/hw3/ui
 !pom.xml
 !.gitignore

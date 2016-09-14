@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.text.Font?>
+<?import ru.ifmo.ctddev.segal.hw3.myjavafx.EmbeddedWebView?>
+
+<AnchorPane maxHeight="600.0"
+            maxWidth="900.0"
+            minHeight="232.0"
+            minWidth="409.0"
+            prefHeight="232.0"
+            prefWidth="417.0"
+            xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/2.2"
+            fx:controller="ru.ifmo.ctddev.segal.hw3.ui.MainController">
+    <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" minWidth="50.0" prefWidth="-1.0" text="σ = ">
+        <font>
+            <Font size="20.0" fx:id="x1"/>
+        </font>
+    </Label>
+    <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="43.0" minWidth="50.0" prefWidth="-1.0" text="b = "/>
+    <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="70.0" minWidth="50.0" prefWidth="-1.0" text="r = "/>
+    <TextField fx:id="sigmaValue" layoutX="64.0" layoutY="19.0" maxWidth="70.0" minWidth="70.0"
+               prefWidth="70.0"/>
+    <TextField fx:id="bValue" layoutX="64.0" layoutY="48.0" maxWidth="70.0" minWidth="70.0"
+               prefWidth="70.0"/>
+    <TextField fx:id="rValue" layoutX="64.0" layoutY="74.0" maxWidth="70.0" minWidth="70.0"
+               prefWidth="70.0"/>
+    <EmbeddedWebView alignment="CENTER"
+                     layoutX="148.0"
+                     layoutY="14.0"
+                     prefWidth="80.0"
+                     prefHeight="40.0"
+                     fx:id="embeddedWebView">
+        <content>
+            <![CDATA[
+                x<sub>0</sub> =
+            ]]>
+        </content>
+    </EmbeddedWebView>
+    <Label alignment="CENTER" font="$x1" layoutX="148.0" layoutY="43.0" minWidth="50.0" prefWidth="-1.0" text="y₀ = "/>
+    <Label alignment="CENTER" font="$x1" layoutX="148.0" layoutY="70.0" minWidth="50.0" prefWidth="-1.0" text="z₀ = "/>
+    <TextField fx:id="xValue" layoutX="198.0" layoutY="19.0" maxWidth="70.0" minWidth="70.0"
+               prefWidth="70.0"/>
+    <TextField fx:id="yValue" layoutX="198.0" layoutY="48.0" maxWidth="70.0" minWidth="70.0"
+               prefWidth="70.0"/>
+    <TextField fx:id="zValue" layoutX="198.0" layoutY="75.0" maxWidth="70.0" minWidth="70.0"
+               prefWidth="70.0"/>
+    <Button layoutX="157.0" layoutY="112.0" mnemonicParsing="false" onAction="#runClick" prefWidth="108.0" text="RUN"/>
+    <Label alignment="CENTER" font="$x1" layoutX="282.0" layoutY="14.0" minWidth="50.0" prefWidth="-1.0" text="tₐ = "/>
+    <Label alignment="CENTER" font="$x1" layoutX="282.0" layoutY="43.0" minWidth="50.0" prefWidth="-1.0" text="t = "/>
+    <Label alignment="CENTER" font="$x1" layoutX="282.0" layoutY="70.0" minWidth="50.0" prefWidth="-1.0" text="Δt = "/>
+    <TextField fx:id="taValue" layoutX="332.0" layoutY="19.0" maxWidth="70.0" minWidth="70.0"
+               prefWidth="70.0"/>
+    <TextField fx:id="tbValue" layoutX="332.0" layoutY="48.0" maxWidth="70.0" minWidth="70.0"
+               prefWidth="70.0"/>
+    <TextField fx:id="dtValue" layoutX="332.0" layoutY="75.0" maxWidth="70.0" minWidth="70.0"
+               prefWidth="70.0"/>
+    <Label layoutX="298.0" layoutY="58.0" text="b"/>
+
+    <CheckBox fx:id="eulerMethod"
+              layoutX="98.0"
+              layoutY="143.0"
+              mnemonicParsing="false"
+              selected="true"
+              text="Euler Method"/>
+    <CheckBox id="eulerMethod"
+              fx:id="implicitMethod"
+              layoutX="197.0"
+              layoutY="143.0"
+              mnemonicParsing="false"
+              selected="true" text="Implicit Euler Method"/>
+    <CheckBox id="eulerMethod"
+              fx:id="rungeMethod"
+              layoutX="93.0"
+              layoutY="165.0"
+              mnemonicParsing="false"
+              selected="true"
+              text="Runge–Kutta Method"/>
+    <CheckBox id="eulerMethod"
+              fx:id="adamsMethod"
+              layoutX="234.0"
+              layoutY="165.0"
+              mnemonicParsing="false"
+              selected="true"
+              text="Adams method"/>
+
+    <Button layoutX="134.0" layoutY="193.0" mnemonicParsing="false" onAction="#build2DXTPlot"
+            text="x(t) plot"/>
+    <Button layoutX="217.0" layoutY="193.0" mnemonicParsing="false" onAction="#build2DYTPlot"
+            text="y(t) plot"/>
+    <Button layoutX="300.0" layoutY="193.0" mnemonicParsing="false" onAction="#build2DZTPlot"
+            text="z(t) plot"/>
+</AnchorPane>

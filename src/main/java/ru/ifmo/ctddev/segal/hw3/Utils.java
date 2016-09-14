@@ -16,4 +16,12 @@ public class Utils {
         }
         return true;
     }
+
+    /**
+     * @param value double to convert
+     * @return converts double to string with 2 digits precision
+     */
+    public static String doublePrecision(double value) {
+        return String.format("%.2f", value);
+    }
 }
