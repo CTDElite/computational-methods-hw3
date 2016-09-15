@@ -1,6 +1,6 @@
 package ru.ifmo.ctddev.segal.hw3;
 
-public class EulerMethod extends MethodForLorentzSystem {
+public class EulerMethod extends MethodForLorenzSystem {
     /**
      * Instantiates Euler method.
      *
@@ -10,7 +10,8 @@ public class EulerMethod extends MethodForLorentzSystem {
         super(sigma, b, r, ta, tb, dt, x0, y0, z0);
     }
 
-    public Result run() {
+    @Override
+    public Result call() {
         Result result = new Result();
         double curX = x0;
         double curY = y0;

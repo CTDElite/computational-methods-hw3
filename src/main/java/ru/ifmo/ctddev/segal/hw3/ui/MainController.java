@@ -58,7 +58,7 @@ public class MainController implements Initializable {
     private double tb;
     private double dt;
 
-    private List<MethodForLorentzSystem> methods = new ArrayList<>();
+    private List<MethodForLorenzSystem> methods = new ArrayList<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -101,8 +101,8 @@ public class MainController implements Initializable {
     private void build2DPlots(String firstAxis, String secondAxis) {
         if (!methods.isEmpty()) {
             Plot2DBuilder plot = new Plot2DBuilder(firstAxis, secondAxis);
-            for (MethodForLorentzSystem method : methods) {
-                Result result = method.run();
+            for (MethodForLorenzSystem method : methods) {
+                Result result = method.call();
                 plot.addPlot(method.getClass().getSimpleName(), result.t, result.x);
             }
             plot.show();
@@ -142,23 +142,7 @@ public class MainController implements Initializable {
             methods.add(new AdamsBashforthMoultonMethod(x0, y0, z0, sigma, b, r, ta, tb, dt));
         }
 
-        Thread[] threads = new Thread[methods.size()];
-        for (int i = 0; i < methods.size(); i++) {
-            final int tmp = i;
-            threads[tmp] = new Thread(() -> methods.get(tmp).run());
-        }
-
-        for (Thread thread : threads) {
-            thread.run();
-        }
-
-        for (Thread thread : threads) {
-            try {
-                thread.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        build2DPlots("t", "x");
     }
 
     private class OnlyDouble implements EventHandler<KeyEvent> {

@@ -1,6 +1,6 @@
 package ru.ifmo.ctddev.segal.hw3;
 
-public class ImplicitEulerMethod extends MethodForLorentzSystem {
+public class ImplicitEulerMethod extends MethodForLorenzSystem {
     /**
      * Instantiates implicit Euler method.
      *
@@ -10,7 +10,7 @@ public class ImplicitEulerMethod extends MethodForLorentzSystem {
         super(sigma, b, r, ta, tb, dt, x0, y0, z0);
     }
 
-    public Result run() {
+    public Result call() {
         return null; // TODO: implement by @dimatomp
     }
 }

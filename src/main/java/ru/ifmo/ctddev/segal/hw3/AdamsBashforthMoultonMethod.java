@@ -1,6 +1,6 @@
 package ru.ifmo.ctddev.segal.hw3;
 
-public class AdamsBashforthMoultonMethod extends MethodForLorentzSystem {
+public class AdamsBashforthMoultonMethod extends MethodForLorenzSystem {
     /**
      * Instantiates Adams-Bashforth-Moulton (Adams-Moulton as
      * predictor and Adams-Bashforth as corrector) method.
@@ -14,7 +14,7 @@ public class AdamsBashforthMoultonMethod extends MethodForLorentzSystem {
         super(sigma, b, r, ta, tb, dt, x0, y0, z0);
     }
 
-    public Result run() {
+    public Result call() {
         return null; // TODO: implement by @alex-700
     }
 }

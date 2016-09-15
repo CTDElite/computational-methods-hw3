@@ -1,6 +1,8 @@
 package ru.ifmo.ctddev.segal.hw3;
 
-public abstract class MethodForLorentzSystem {
+import java.util.concurrent.Callable;
+
+public abstract class MethodForLorenzSystem implements Callable<Result> {
 
     protected final double sigma;
     protected final double b;
@@ -27,9 +29,9 @@ public abstract class MethodForLorentzSystem {
      * @param y0 initial value of y
      * @param z0 initial value of z
      */
-    public MethodForLorentzSystem(double sigma, double b, double r,
-                                  double ta, double tb, double dt,
-                                  double x0, double y0, double z0) {
+    public MethodForLorenzSystem(double sigma, double b, double r,
+                                 double ta, double tb, double dt,
+                                 double x0, double y0, double z0) {
         this.sigma = sigma;
         this.b = b;
         this.r = r;
@@ -89,7 +91,7 @@ public abstract class MethodForLorentzSystem {
      * Your code should like something like:
      *
      * ```
-     * List<Double> x, y, z, t; // Should be instantiated of
+     * List<Double> x, y, z, t; // Should be instantiated ofc
      * for (double i = ta; i <= tb; i += dt) {
      *     // Some math
      * }
@@ -109,5 +111,6 @@ public abstract class MethodForLorentzSystem {
      *
      * @return result with x(t), y(t), z(t) and t(x, y, z) values.
      */
-    public abstract Result run();
+    @Override
+    public abstract Result call();
 }
