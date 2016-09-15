@@ -30,7 +30,7 @@ public class Result {
         this.x.add(x);
         this.y.add(y);
         this.z.add(z);
-        this.t.add(y);
+        this.t.add(t);
     }
 
     public int size() {
