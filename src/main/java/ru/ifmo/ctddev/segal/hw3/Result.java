@@ -9,13 +9,13 @@ public class Result {
     public final List<Double> z;
     public final List<Double> t;
 
-
     public Result() {
         x = new ArrayList<>();
         y = new ArrayList<>();
         z = new ArrayList<>();
         t = new ArrayList<>();
     }
+
     public Result(List<Double> x,
                   List<Double> y,
                   List<Double> z,

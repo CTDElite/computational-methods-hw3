@@ -1,5 +1,8 @@
 package ru.ifmo.ctddev.segal.hw3;
 
+/**
+ * @author Aleksei Latyshev
+ */
 public class AdamsBashforthMoultonMethod extends MethodForLorenzSystem {
     /**
      * Instantiates Adams-Bashforth-Moulton (Adams-Moulton as
@@ -14,7 +17,26 @@ public class AdamsBashforthMoultonMethod extends MethodForLorenzSystem {
         super(sigma, b, r, ta, tb, dt, x0, y0, z0);
     }
 
+    private static final double HALF = 0.5;
+
     public Result call() {
-        return null; // TODO: implement by @alex-700
+        // TODO: implement by @alex-700
+        ResultBuilder resultBuilder = new ResultBuilder();
+        double curX = x0;
+        double curY = y0;
+        double curZ = z0;
+        double nextX, nextY, nextZ;
+        for (double curT = ta; curT <= tb; curT += dt, curX = nextX, curY = nextY, curZ = nextZ) {
+            resultBuilder.append(curX, curY, curZ, curT);
+            // predictor (Euler method)
+            double midX = curX + firstEquation(curX, curY, curZ) * dt;
+            double midY = curY + secondEquation(curX, curY, curZ) * dt;
+            double midZ = curZ + thirdEquation(curX, curY, curZ) * dt;
+            // corrector (Trapezoid method)
+            nextX = curX + HALF * dt * (firstEquation(curX, curY, curZ) + firstEquation(midX, midY, midZ));
+            nextY = curY + HALF * dt * (secondEquation(curX, curY, curZ) + secondEquation(midX, midY, midZ));
+            nextZ = curZ + HALF * dt * (thirdEquation(curX, curY, curZ) + thirdEquation(midX, midY, midZ));
+        }
+        return resultBuilder.toResult();
     }
 }
