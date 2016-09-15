@@ -1,9 +1,13 @@
 package ru.ifmo.ctddev.segal.hw3.myjavafx;
+
+import com.sun.javafx.webkit.Accessor;
 import javafx.scene.layout.StackPane;
+import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
 /**
  * A WebView which has getters and setters for content or a document url.
+ * It also sets the page background color to transparent.
  *
  * Usage in FXML element is:
  *
@@ -21,13 +25,14 @@ import javafx.scene.web.WebView;
  */
 public class EmbeddedWebView extends StackPane {
 
-    final private WebView webView;
+    final private WebEngine webEngine;
 
     private String content;
 
     public EmbeddedWebView() {
-        webView = new WebView();
+        WebView webView = new WebView();
         getChildren().add(webView);
+        webEngine = webView.getEngine();
     }
 
     public String getContent() {
@@ -35,11 +40,13 @@ public class EmbeddedWebView extends StackPane {
     }
 
     /**
-     * Loads html content directly into the webview.
-     * @param content a html content string to load into the webview.
+     * Loads HTML content directly into the WebView.
+     * @param content an HTML content string to load into the WebView.
      */
     public void setContent(String content) {
         this.content = content;
-        webView.getEngine().loadContent(content);
+        webEngine.loadContent(content);
+        Accessor.getPageFor(webEngine).setBackgroundColor(0);
     }
+
 }
