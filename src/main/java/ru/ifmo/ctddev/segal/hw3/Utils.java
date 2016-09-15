@@ -1,5 +1,8 @@
 package ru.ifmo.ctddev.segal.hw3;
 
+import java.util.Arrays;
+import java.util.Locale;
+
 public class Utils {
 
     /**
@@ -9,12 +12,7 @@ public class Utils {
      *         false, if there is at least one illegal number
      */
     public static boolean doublesAreCorrect(Double... doubles) {
-        for (Double d : doubles) {
-            if (d.isNaN() || d.isInfinite()) {
-                return false;
-            }
-        }
-        return true;
+        return Arrays.stream(doubles).noneMatch(d -> d.isNaN() || d.isInfinite());
     }
 
     /**
@@ -22,6 +20,6 @@ public class Utils {
      * @return converts double to string with 2 digits precision
      */
     public static String doublePrecision(double value) {
-        return String.format("%.2f", value);
+        return String.format(Locale.US, "%.2f", value);
     }
 }
