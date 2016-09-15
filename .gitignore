@@ -1,4 +1,5 @@
 # Specially for Daria Vladimirovna
+*
 !*.java
 !*.scala
 !*.groovy
