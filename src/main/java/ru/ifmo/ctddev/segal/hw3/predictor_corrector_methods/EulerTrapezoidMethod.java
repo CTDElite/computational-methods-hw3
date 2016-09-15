@@ -1,26 +1,19 @@
-package ru.ifmo.ctddev.segal.hw3;
+package ru.ifmo.ctddev.segal.hw3.predictor_corrector_methods;
 
-/**
- * @author Aleksei Latyshev
- */
-public class AdamsBashforthMoultonMethod extends MethodForLorenzSystem {
-    /**
-     * Instantiates Adams-Bashforth-Moulton (Adams-Moulton as
-     * predictor and Adams-Bashforth as corrector) method.
-     *
-     * WARNING! I can be wrong here (I mean in description above or in
-     * link below), so before implementing investigate it yourself.
-     *
-     * See: https://en.wikipedia.org/wiki/Linear_multistep_method#Adams.E2.80.93Moulton_methods.
-     */
-    public AdamsBashforthMoultonMethod(double sigma, double b, double r, double ta, double tb, double dt, double x0, double y0, double z0) {
-        super(sigma, b, r, ta, tb, dt, x0, y0, z0);
-    }
+import ru.ifmo.ctddev.segal.hw3.MethodForLorenzSystem;
+import ru.ifmo.ctddev.segal.hw3.Result;
+import ru.ifmo.ctddev.segal.hw3.ResultBuilder;
+
+public class EulerTrapezoidMethod extends MethodForLorenzSystem {
 
     private static final double HALF = 0.5;
 
+    public EulerTrapezoidMethod(double sigma, double b, double r, double ta, double tb, double dt, double x0, double y0, double z0) {
+        super(sigma, b, r, ta, tb, dt, x0, y0, z0);
+    }
+
+    @Override
     public Result call() {
-        // TODO: implement by @alex-700
         ResultBuilder resultBuilder = new ResultBuilder();
         double curX = x0;
         double curY = y0;
