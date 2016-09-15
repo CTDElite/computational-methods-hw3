@@ -133,13 +133,13 @@ public class MainController implements Initializable {
             methods.add(new EulerMethod(sigma, b, r, ta, tb, dt, x0, y0, z0));
         }
         if (implicitMethod.isSelected()) {
-            methods.add(new ImplicitEulerMethod(x0, y0, z0, sigma, b, r, ta, tb, dt));
+            methods.add(new ImplicitEulerMethod(sigma, b, r, ta, tb, dt, x0, y0, z0));
         }
         if (rungeMethod.isSelected()) {
-            methods.add(new RungeKuttaMethod(x0, y0, z0, sigma, b, r, ta, tb, dt));
+            methods.add(new RungeKuttaMethod(sigma, b, r, ta, tb, dt, x0, y0, z0));
         }
         if (adamsMethod.isSelected()) {
-            methods.add(new AdamsBashforthMoultonMethod(x0, y0, z0, sigma, b, r, ta, tb, dt));
+            methods.add(new AdamsBashforthMoultonMethod(sigma, b, r, ta, tb, dt, x0, y0, z0));
         }
 
         build2DPlots("t", "x");
