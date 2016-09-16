@@ -140,7 +140,7 @@ public class MainController implements Initializable {
             methods.add(new RungeKuttaMethod(sigma, b, r, ta, tb, dt, x0, y0, z0));
         }
         if (adamsMethod.isSelected()) {
-            methods.add(new AdamsBashforthMoultonMethod(sigma, b, r, ta, tb, dt, x0, y0, z0));
+            methods.add(new AdamsBashforthMoultonMethod(sigma, b, r, ta, tb, dt, x0, y0, z0, AdamsBashforthMoultonMethod.Steps.FOUR));
         }
 
         build2DPlots("t", "x");

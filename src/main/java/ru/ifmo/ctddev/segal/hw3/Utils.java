@@ -22,4 +22,15 @@ public class Utils {
     public static String doublePrecision(double value) {
         return String.format(Locale.US, "%.2f", value);
     }
+
+    /**
+     * Shift array to the right and set the first element with {@code toFirstPlace}
+     *
+     * @param elements -- array for shifting
+     * @param toFirstPlace -- element for the first place after shifting
+     */
+    public static void shiftDoubleArrayRight(double[] elements, double toFirstPlace) {
+        System.arraycopy(elements, 0, elements, 1, elements.length - 1);
+        elements[0] = toFirstPlace;
+    }
 }
