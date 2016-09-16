@@ -1,6 +1,7 @@
 package ru.ifmo.ctddev.segal.hw3.ui;
 
 
+import org.math.plot.plots.Plot;
 import ru.ifmo.ctddev.segal.hw3.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -16,10 +17,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.concurrent.*;
 
 public class MainController implements Initializable {
 
     private Random rand = new Random();
+
+    private ExecutorService executorService = Executors.newFixedThreadPool(1);
 
     @FXML
     private TextField sigmaValue;
@@ -99,14 +103,16 @@ public class MainController implements Initializable {
         dt = Double.parseDouble(dtValue.getText());
     }
 
-    private void build2DPlots(String firstAxis, String secondAxis) {
+    private Plot2DBuilder build2DPlots(String firstAxis, String secondAxis) {
         if (!methods.isEmpty()) {
             Plot2DBuilder plot = new Plot2DBuilder(firstAxis, secondAxis);
             for (MethodForLorenzSystem method : methods) {
                 Result result = method.call();
                 plot.addPlot(method.getClass().getSimpleName(), result.t, result.x);
             }
-            plot.show();
+            return plot;
+        } else {
+            return null;
         }
     }
 
@@ -142,8 +148,16 @@ public class MainController implements Initializable {
         if (adamsMethod.isSelected()) {
             methods.add(new AdamsBashforthMoultonMethod(sigma, b, r, ta, tb, dt, x0, y0, z0, AdamsBashforthMoultonMethod.Steps.FOUR));
         }
-
-        build2DPlots("t", "x");
+        Future<Plot2DBuilder> future = executorService.submit(() -> build2DPlots("t", "x"));
+        Plot2DBuilder plot = null;
+        try {
+            plot = future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace(); // FIXME: too lazy to do something with this
+        }
+        if (plot != null) {
+            plot.show();
+        }
     }
 
     private class OnlyDouble implements EventHandler<KeyEvent> {
