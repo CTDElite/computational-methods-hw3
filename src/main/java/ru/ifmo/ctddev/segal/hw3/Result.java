@@ -1,6 +1,7 @@
 package ru.ifmo.ctddev.segal.hw3;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Result {
@@ -9,28 +10,14 @@ public class Result {
     public final List<Double> z;
     public final List<Double> t;
 
-    public Result() {
-        x = new ArrayList<>();
-        y = new ArrayList<>();
-        z = new ArrayList<>();
-        t = new ArrayList<>();
-    }
-
     public Result(List<Double> x,
                   List<Double> y,
                   List<Double> z,
                   List<Double> t) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.t = t;
-    }
-
-    public void addPoint(double x, double y, double z, double t) {
-        this.x.add(x);
-        this.y.add(y);
-        this.z.add(z);
-        this.t.add(t);
+        this.x = Collections.unmodifiableList(new ArrayList<>(x));
+        this.y = Collections.unmodifiableList(new ArrayList<>(y));
+        this.z = Collections.unmodifiableList(new ArrayList<>(z));
+        this.t = Collections.unmodifiableList(new ArrayList<>(t));
     }
 
     public int size() {

@@ -15,19 +15,12 @@ public class RungeKuttaMethod extends MethodForLorenzSystem {
 
     @Override
     public Result call() {
-        int capacity = (int) ((tb - ta) / dt) + 1;
-        List<Double> xs = new ArrayList<>(capacity);
-        List<Double> ys = new ArrayList<>(capacity);
-        List<Double> zs = new ArrayList<>(capacity);
-        List<Double> ts = new ArrayList<>(capacity);
+        ResultBuilder builder = new ResultBuilder();
         double x = x0;
         double y = y0;
         double z = z0;
         for (double t = ta; t <= tb; t += dt) {
-            xs.add(x);
-            ys.add(y);
-            zs.add(z);
-            ts.add(t);
+            builder.append(x, y, z, t);
             double k11 = firstEquation(x, y, z);
             double k12 = secondEquation(x, y, z);
             double k13 = thirdEquation(x, y, z);
@@ -48,8 +41,6 @@ public class RungeKuttaMethod extends MethodForLorenzSystem {
             y += dt/6 * secondEquation(k11 + 2*k21 + 2*k31 + k41, k12 + 2*k22 + 2*k32 + k42, k13 + 2*k23 + 2*k33 + k43);
             z += dt/6 * thirdEquation(k11 + 2*k21 + 2*k31 + k41, k12 + 2*k22 + 2*k32 + k42, k13 + 2*k23 + 2*k33 + k43);
         }
-        Result result = new Result(xs, ys, zs, ts);
-        result.checkValues();
-        return result;
+        return builder.toResult();
     }
 }

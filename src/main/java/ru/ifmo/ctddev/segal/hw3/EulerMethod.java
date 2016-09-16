@@ -12,7 +12,7 @@ public class EulerMethod extends MethodForLorenzSystem {
 
     @Override
     public Result call() {
-        Result result = new Result();
+        ResultBuilder builder = new ResultBuilder();
         double curX = x0;
         double curY = y0;
         double curZ = z0;
@@ -20,7 +20,7 @@ public class EulerMethod extends MethodForLorenzSystem {
         double nextY;
         double nextZ;
         for (double t = ta; t <= tb; t += dt) {
-            result.addPoint(curX, curY, curZ, t);
+            builder.append(curX, curY, curZ, t);
             nextX = firstEquation(curX, curY, curZ) * dt + curX;
             nextY = secondEquation(curX, curY, curZ) * dt + curY;
             nextZ = thirdEquation(curX, curY, curZ) * dt + curZ;
@@ -28,7 +28,6 @@ public class EulerMethod extends MethodForLorenzSystem {
             curY = nextY;
             curZ = nextZ;
         }
-        result.checkValues();
-        return result;
+        return builder.toResult();
     }
 }
