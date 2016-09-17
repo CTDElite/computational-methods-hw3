@@ -2,7 +2,7 @@
 *
 !*.java
 !*.scala
-!*.groovy
+!*.kt
 !*.hs
 !*.fxml
 !src/main/java/ru/ifmo/ctddev/segal/hw3/ui
