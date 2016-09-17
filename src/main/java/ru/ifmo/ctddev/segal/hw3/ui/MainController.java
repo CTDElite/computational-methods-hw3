@@ -1,7 +1,7 @@
 package ru.ifmo.ctddev.segal.hw3.ui;
 
 
-import org.math.plot.plots.Plot;
+import javafx.application.Platform;
 import ru.ifmo.ctddev.segal.hw3.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -148,16 +148,12 @@ public class MainController implements Initializable {
         if (adamsMethod.isSelected()) {
             methods.add(new AdamsBashforthMoultonMethod(sigma, b, r, ta, tb, dt, x0, y0, z0, AdamsBashforthMoultonMethod.Steps.FOUR));
         }
-        Future<Plot2DBuilder> future = executorService.submit(() -> build2DPlots("t", "x"));
-        Plot2DBuilder plot = null;
-        try {
-            plot = future.get();
-        } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace(); // FIXME: too lazy to do something with this
-        }
-        if (plot != null) {
-            plot.show();
-        }
+        executorService.submit(() -> {
+            final Plot2DBuilder plot = build2DPlots("t", "x");
+            if (plot != null) {
+                Platform.runLater(plot::show);
+            }
+        });
     }
 
     private class OnlyDouble implements EventHandler<KeyEvent> {
