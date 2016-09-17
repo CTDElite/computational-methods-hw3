@@ -18,5 +18,10 @@ public class Point {
         return new Point(k * x, k * y, k * z);
     }
 
+    @Override
+    public String toString() {
+        return String.format("[%f, %f, %f]", x, y, z);
+    }
+
     public final double x, y, z;
 }
