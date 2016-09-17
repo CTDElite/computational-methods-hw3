@@ -1,5 +1,7 @@
 package ru.ifmo.ctddev.segal.hw3.niftystuff;
 
+import java.util.Locale;
+
 /**
  * @author Ignat Loskutov.
  */
@@ -20,7 +22,7 @@ public class Point {
 
     @Override
     public String toString() {
-        return String.format("[%f, %f, %f]", x, y, z);
+        return String.format(Locale.CANADA, "[%f, %f, %f]", x, y, z);
     }
 
     public final double x, y, z;

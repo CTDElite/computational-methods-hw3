@@ -20,7 +20,7 @@ public class Utils {
      * @return converts double to string with 2 digits precision
      */
     public static String doublePrecision(double value) {
-        return String.format(Locale.US, "%.2f", value);
+        return String.format(Locale.CANADA, "%.2f", value);
     }
 
     /**
