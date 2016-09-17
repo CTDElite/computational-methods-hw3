@@ -33,7 +33,7 @@ public class RungeKuttaMethod extends MethodForLorenzSystem {
             Point k3 = f.apply(p.add(k2.mul(dt/2)));
             Point k4 = f.apply(p.add(k3.mul(dt)));
 
-            p = p.add(k1.add(k2.mul(2)).add(k3.mul(2)).add(k4)).mul(dt/6);
+            p = p.add(k1.add(k2.mul(2)).add(k3.mul(2)).add(k4).mul(dt/6));
         }
         return builder.toResult();
     }
