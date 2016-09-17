@@ -6,5 +6,6 @@
 !*.hs
 !*.fxml
 !src/main/java/ru/ifmo/ctddev/segal/hw3/ui
+!src/main/java/ru/ifmo/ctddev/segal/hw3/niftystuff
 !pom.xml
 !.gitignore
