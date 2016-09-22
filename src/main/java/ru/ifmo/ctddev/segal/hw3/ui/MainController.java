@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.concurrent.*;
+import java.util.function.Function;
 
 public class MainController implements Initializable {
 
@@ -90,6 +91,8 @@ public class MainController implements Initializable {
     }
 
     private void update() {
+        methods.clear();
+
         sigma = Double.parseDouble(sigmaValue.getText());
         r = Double.parseDouble(rValue.getText());
         b = Double.parseDouble(bValue.getText());
@@ -101,41 +104,7 @@ public class MainController implements Initializable {
         ta = Double.parseDouble(taValue.getText());
         tb = Double.parseDouble(tbValue.getText());
         dt = Double.parseDouble(dtValue.getText());
-    }
 
-    private Plot2DBuilder build2DPlots(String firstAxis, String secondAxis) {
-        if (!methods.isEmpty()) {
-            Plot2DBuilder plot = new Plot2DBuilder(firstAxis, secondAxis);
-            for (MethodForLorenzSystem method : methods) {
-                Result result = method.call();
-                plot.addPlot(method.getClass().getSimpleName(), result.t, result.x);
-            }
-            return plot;
-        } else {
-            return null;
-        }
-    }
-
-    @FXML
-    private void build2DXTPlot(ActionEvent event) {
-        build2DPlots("T", "X");
-    }
-
-    @FXML
-    private void build2DYTPlot(ActionEvent event) {
-        build2DPlots("T", "Y");
-    }
-
-    @FXML
-    private void build2DZTPlot(ActionEvent event) {
-        build2DPlots("T", "Z");
-    }
-
-    @FXML
-    private void runClick(ActionEvent event) {
-
-        methods.clear();
-        update();
         if (eulerMethod.isSelected()) {
             methods.add(new EulerMethod(sigma, b, r, ta, tb, dt, x0, y0, z0));
         }
@@ -148,12 +117,40 @@ public class MainController implements Initializable {
         if (adamsMethod.isSelected()) {
             methods.add(new AdamsBashforthMoultonMethod(sigma, b, r, ta, tb, dt, x0, y0, z0, AdamsBashforthMoultonMethod.Steps.FOUR));
         }
+    }
+
+    private void build2DPlots(String firstAxis,
+                                       String secondAxis,
+                                       Function<Result, List<Double>> abscissas,
+                                       Function<Result, List<Double>> ordinates) {
         executorService.submit(() -> {
-            final Plot2DBuilder plot = build2DPlots("t", "x");
-            if (plot != null) {
+            if (!methods.isEmpty()) {
+                Plot2DBuilder plot = new Plot2DBuilder(firstAxis, secondAxis);
+                for (MethodForLorenzSystem method : methods) {
+                    Result result = method.call();
+                    plot.addPlot(method.getClass().getSimpleName(), abscissas.apply(result), ordinates.apply(result));
+                }
                 Platform.runLater(plot::show);
             }
         });
+    }
+
+    @FXML
+    private void build2DXTPlot(ActionEvent event) {
+        update();
+        build2DPlots("T", "X", result -> result.t, result -> result.x);
+    }
+
+    @FXML
+    private void build2DYTPlot(ActionEvent event) {
+        update();
+        build2DPlots("T", "Y", result -> result.t, result -> result.y);
+    }
+
+    @FXML
+    private void build2DZTPlot(ActionEvent event) {
+        update();
+        build2DPlots("T", "Z", result -> result.t, result -> result.z);
     }
 
     private class OnlyDouble implements EventHandler<KeyEvent> {
