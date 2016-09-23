@@ -136,6 +136,21 @@ public class MainController implements Initializable {
     }
 
     @FXML
+    private void build3DPlot(ActionEvent event) {
+        update();
+        executorService.submit(() -> {
+            if (!methods.isEmpty()) {
+                Plot3DBuilder plot = new Plot3DBuilder();
+                for (MethodForLorenzSystem method : methods) {
+                    Result result = method.call();
+                    plot.addPlot(method.getClass().getSimpleName(), result.x, result.y, result.z);
+                }
+                Platform.runLater(plot::show);
+            }
+        });
+    }
+
+    @FXML
     private void build2DXTPlot(ActionEvent event) {
         update();
         build2DPlots("T", "X", result -> result.t, result -> result.x);

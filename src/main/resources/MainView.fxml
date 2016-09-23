@@ -114,6 +114,8 @@
               selected="false"
               text="Adams method"/>
 
+    <Button layoutX="51.0" layoutY="193.0" mnemonicParsing="false" onAction="#build3DPlot"
+            text="3D plot" />
     <Button layoutX="134.0" layoutY="193.0" mnemonicParsing="false" onAction="#build2DXTPlot"
             text="x(t) plot"/>
     <Button layoutX="217.0" layoutY="193.0" mnemonicParsing="false" onAction="#build2DYTPlot"
