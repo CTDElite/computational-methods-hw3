@@ -38,7 +38,7 @@ class ImplicitEulerMethod (sigma: Double, b: Double, r: Double, ta: Double, tb: 
             val gamma = yc / (1 + b)
             val delta = (-alpha * b + c) / (1 + b)
             val eta = -b * beta / (1 + b)
-            xc = solveCubicEq(-eta * (1 + a), eta * xc, 1 + a - delta, -xc - a * gamma, xc)
+            xc = solveCubicEq(-eta * (1 + a), eta * xc, 1 + a - a * delta, -xc - a * gamma, xc)
             yc = (gamma + delta * xc) / (1 - eta * xc * xc)
             zc = alpha + beta * xc * yc
             t += dt
